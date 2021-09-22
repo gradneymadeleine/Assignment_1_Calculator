@@ -9,6 +9,9 @@ Note: Sorry for not re-updating this GitHub throughout the process. I had some c
 * Name: Scott Fitzpatrick
 * Student ID: 2328196
 * Email: sfitzpatrick@chapman.edu
+* Name: Madeleine Gradney
+* Student ID: 2298459
+* Email: gradney@chapman.edu
 * Course: CPSC 354
 * Assignment: 1
 
