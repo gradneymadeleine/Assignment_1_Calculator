@@ -79,4 +79,26 @@ n2p (S n) = T(n2p n)
 
 
 --Fractions
+--non-neg
+type Frac = (NN, PN)
 
+
+
+--add
+addF :: Frac -> Frac -> Frac
+addF((S n), (T m)) (x, y) | (T m)==y = (add(S n) (p2n y), (mult x (p2n (T m)), (multP (T m)y))) --fucked this up somewhere
+| (T m)/=y = addF (mult (S n) (p2n y), (multP(T m)y))
+
+--mult
+multF :: Frac -> Frac -> Frac
+multF ((S n), (T m)) (x,y) = (mult (S n) x, multP (T m) y)
+
+--equality fractions
+--check if two frations are =
+    equalF :: Frac
+    equalF ((S n), (T m)) (x,y) = (mult (S n) (p2n y)) == (mult (p2n (T m)) x)
+
+--simplfy
+simplifyF ::
+simplifyF ((S n), (T m)) = ((divP (S n) (n2p(gcdN (S n) (p2n (T m)))))),
+(n2p (divP (p2n(T m)) (n2p(gcdN(S n)(p2n (T m))))))
