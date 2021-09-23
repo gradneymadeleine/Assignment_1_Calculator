@@ -71,3 +71,12 @@ lessP n I = False
 lessP I n = True
 lessP (T n) (T m ) = lessP n m
 
+--convert NN to PN
+n2p :: NN -> PN
+n2p 0 = error "0 ≠ positive number"
+n2p (S O)= I
+n2p (S n) = T(n2p n)
+
+
+--Fractions
+
