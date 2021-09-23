@@ -3,7 +3,7 @@
 
 The objective of this assignment was to 1) implement addP in arithmetic.hs
 
-Note: Sorry for not re-updating this GitHub throughout the process. I had some confusion looking for a partner.
+
 
 ## Identifying Information
 * Name: Scott Fitzpatrick
