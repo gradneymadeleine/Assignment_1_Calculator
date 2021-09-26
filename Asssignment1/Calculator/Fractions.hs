@@ -35,17 +35,17 @@ gcdN n m | less n m ==False = gcdN m (subtr n m)
 
 
 --Positive Num
-data PN = I | T PN
+data PP = I | T PP
 deriving (Eq, Show)
 
---recursion o PN
+--recursion o PP
 --addition
-addP :: PN -> PN -> PN
+addP :: PP -> PP -> PP
 addP I n = (T n)
 addP (T n) m = T
 
 --sub
-subtrNP :: NN -> PN -> NN
+subtrNP :: NN -> PP -> NN
 -- can't sub a (+) from 0
 subtrNP O n = O
 --(1+n)-1=n; base case
@@ -53,26 +53,26 @@ subtrNP (S n) I = n
 subtrNP (S n) (T m) = subtrNP n m
 
 --mult
-multP :: PN -> PN -> PN
+multP :: PP -> PP -> PP
 multP I n = n
 multP (T n) m = addP m (mukltP n m)
 
 --div
-divP :: NN -> PN -> NN
+divP :: NN -> PP -> NN
 divP n m = if n == (p2n m) then (S O)
 else if (less n(p2n m)) then O
 else (add (S O) (divP (subtrNP n m)m))
 
 --n < m
-lessP :: PN -> PN -> PN
+lessP :: PP -> PP -> PP
 -- n ≠ or > 0
 lessP n I = False
 -- I < 1
 lessP I n = True
 lessP (T n) (T m ) = lessP n m
 
---convert NN to PN
-n2p :: NN -> PN
+--convert NN to PP
+n2p :: NN -> PP
 n2p 0 = error "0 ≠ positive number"
 n2p (S O)= I
 n2p (S n) = T(n2p n)
@@ -80,7 +80,7 @@ n2p (S n) = T(n2p n)
 
 --Fractions
 --non-neg
-type Frac = (NN, PN)
+type Frac = (NN, PP)
 
 
 
@@ -95,10 +95,10 @@ multF ((S n), (T m)) (x,y) = (mult (S n) x, multP (T m) y)
 
 --equality fractions
 --check if two frations are =
-    equalF :: Frac
+    equalF :: Frac -> Frac -> Frac
     equalF ((S n), (T m)) (x,y) = (mult (S n) (p2n y)) == (mult (p2n (T m)) x)
 
 --simplfy
-simplifyF ::
+simplifyF :: 
 simplifyF ((S n), (T m)) = ((divP (S n) (n2p(gcdN (S n) (p2n (T m)))))),
 (n2p (divP (p2n(T m)) (n2p(gcdN(S n)(p2n (T m))))))
