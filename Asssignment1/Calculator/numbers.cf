@@ -5,6 +5,7 @@ Div. Exp3 ::= Exp3 "div" Exp4 ;
 Min. Exp4 ::= Exp4 "<" Exp5 ;
 Max. Exp5 ::= Exp5 ">" Exp6 ;
 Mod. Exp6 ::= Exp6 "mod" Exp7 ;
-Num. Exp7 ::= Integer ;
-
-coercions Exp 7 ;
+Exp. Exp7 ::= Exp7 "^" Exp8 ;
+Negate. Exp8 ::= "~" Exp8 ;
+Num. Exp8 ::= Integer ;
+coercions Exp 8 ;

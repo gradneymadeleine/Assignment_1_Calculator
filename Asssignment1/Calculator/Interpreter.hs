@@ -15,3 +15,7 @@ eval (Min n m) | (eval n) > (eval m) = (eval m) | (eval n) < (eval m) = (eval n)
 eval (Max n m) | (eval n) > (eval m) = (eval n) | (eval n) < (eval m) = (eval m)
 
 eval (Mod n m) = mod (eval n) (eval m)
+
+eval (Exp n m) = (eval n) ^ (eval m)
+
+eval (Negate n) = - (eval n)
