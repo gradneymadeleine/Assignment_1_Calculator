@@ -96,23 +96,15 @@ multP :: PP -> PP -> PP
 multP I n = n
 multP (T n) m = addP m (multP n m)
 
--- -- divide positive numbers
--- divP :: NN -> PP -> NN
--- divP n m = if n == (pp_nn m) then (S O)
--- else if (modN n(pp_nn m) == O) then O -- "== O" needs to be tested
--- else (addN (S O) (divP (subtrP n m)m))
-
 -- minimum positive numbers
 minP :: PP -> PP -> Bool
 minP n I = False -- n ≠ or > 0
 minP I n = True -- I < 1-- I < 1
 minP (T n) (T m ) = minP n m
 
--- -- Addition: (a/b)+(c/d)=(ad+bc)/(bd)
+-- Addition: (a/b)+(c/d)=(ad+bc)/(bd)
 addQ :: QQ -> QQ -> QQ
-addQ (QQ a b) (QQ c d) = QQ (addI(multI(a pp_ii(d))) (multI(c pp_ii(b)))) (multI(b pp_ii(d)))
-
--- addQ QQ (a b)(c d) = divQ (addP (multP a d) (multP b c)) (multP b d)
+addQ (QQ a b) (QQ c d) = QQ (addI (multI a (pp_ii d)) (multI c (pp_ii b))) (multP b d)
 
 -- Multiplication: (a/b)*(c/d)=(ac)/(bd)
 multQ :: QQ -> QQ -> QQ
@@ -139,11 +131,6 @@ type Frac = (NN, PP)
 ----------------------------------------------------
 -- Converting between VM-numbers and Haskell-numbers
 ----------------------------------------------------
-
--- convert numbers of type PP to numbers of type II
--- ii_pp :: PP -> II
--- ii_pp I = II (S O) O
--- ii_pp (T n) = addI (ii_pp n) (ii_pp I)
 
 pp_ii :: PP -> II
 pp_ii I = II (S O) O
@@ -188,19 +175,13 @@ int_pp :: PP->Integer
 int_pp I = 1
 int_pp (T n) = (int_pp n) + 1
 
--- float_qq :: QQ -> Float
--- float_qq 
-
-
+float_qq :: QQ -> Float
+float_qq (QQ n m) = fromInteger(int_ii n) / fromInteger(int_pp m)
 
 ----------
 -- Testing
 ----------
 main = do
-    -- print $ addN (S (S O)) (S O)
-    -- print $ multN (S (S O)) (S (S (S O)))
-    -- print $ addP (T (T I)) (T I)
-
     -- Integers: (II i j) represents i-j, (II k l) represents k-l
     let i = 4
     let j = 2
@@ -211,8 +192,8 @@ main = do
     print $ int_ii (multI (II (nn_int i) (nn_int j)) (II (nn_int k) (nn_int l)))
 
     -- Fractions: (QQ i j) represents i/j, (QQ k l) represents k/l
-    -- print $ float_qq (addQ (QQ (ii_int i) (pp_int j)) (QQ (ii_int k) (pp_int l)))
-    -- print $ float_qq (multQ (QQ (ii_int i) (pp_int j)) (QQ (ii_int k) (pp_int l)))
+    print $ float_qq (addQ (QQ (ii_int i) (pp_int j)) (QQ (ii_int k) (pp_int l)))
+    print $ float_qq (multQ (QQ (ii_int i) (pp_int j)) (QQ (ii_int k) (pp_int l)))
     
     -- Normalisation (recursive definition)
     print $ normalizeI (II (nn_int i) (nn_int j))
