@@ -19,7 +19,7 @@ Maddie's Tasks:
 * Arithmetic Portion: NN Arithmetic, Multiplication QQ, add pp, converting pp_ii, pp_nn, nn_pp, nn_int, int_nn, float_qq
 * Calculator Portion: Divide, Min, Max, Negate
 
-//Scott's Tasks:
+Scott's Tasks:
 * Arithmetic Portion: II Arithmetic, subtract pp, multiply pp, mini, addQ, normalizeI, nbv, int_ii, ii_int, pp_int, int_pp
 * Calculator Portion: Plus, Minus, Mod, Exponential
 
