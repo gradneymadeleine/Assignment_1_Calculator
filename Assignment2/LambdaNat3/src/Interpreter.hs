@@ -31,12 +31,13 @@ evalCBN (ENatS e) = ENatS (evalCBN e)
 ----------------------------------------------------
 --- YOUR CODE goes here for extending the interpreter
 ----------------------------------------------------
-evalCBN (EIf e1 e2 e3 e4) = if (evalCBN e1) == (evalCBN e2) then evalCBN e3 else evalCBN e4
+evalCBN (EIf e1 e2 e3 e4) = if (evalCBN e1) == (evalCBN e2) then (evalCBN e3) else (evalCBN e4)
 evalCBN (ELet i e1 e2) = evalCBN (EApp (EAbs i e2) e1) 
---evalCBN (ERec i e1 e2) = evalCBN (EApp (EAbs i e2) (EFix (EAbs i e1)))
+evalCBN (ERec i e1 e2) = evalCBN (EApp (EAbs i e2) (EFix (EAbs i e1)))
 --evalCBN (EFix e) = evalCBN (EApp e (EFix e)) 
--- evalCBN (EMinusOne e) = case (evalCBN e) of ENat0 -> ENat0 (ENatS e) -> e
-evalCBN (EMinusOne e) = case (evalCBN e) of ENat0 -> ENat0 (ENatS e) -> e
+evalCBN (EMinusOne e) = case (evalCBN e) of
+    ENat0 -> ENat0
+    (ENatS e) -> e
 evalCBN x = x -- this is a catch all clause, currently only for variables, must be the clause of the eval function
 
 -- fresh generates fresh names for substitutions, can be ignored for now
@@ -47,6 +48,7 @@ fresh_aux (EApp e1 e2) = fresh_aux e1 ++ fresh_aux e2
 fresh_aux (EAbs (Id i) e) = i ++ fresh_aux e
 fresh_aux _ = "0"
 
+fresh :: Exp -> Id
 fresh = Id . fresh_aux -- for Id see AbsLamdaNat.hs
 
 -- subst implements the beta rule
@@ -63,7 +65,13 @@ subst id s (EAbs id1 e1) =
         e2 = subst id1 (EVar f) e1 in 
         EAbs f (subst id s e2)
 ----------------------------------------------------------------
---- YOUR CODE goes here if subst needs to be extended as well
+--- YOUR CODE goes here if subst needs to be extended as well 
 ----------------------------------------------------------------
 subst id s ENat0 = ENat0 
 subst id s (ENatS e) = ENatS (subst id s e)
+subst id s (EIf e1 e2 e3 e4) = if (subst id s e1) == (subst id s e2) then (subst id s e3) else (subst id s e4)
+subst id s (ELet i e1 e2) = subst id s (EApp (EAbs i e2) e1)
+subst id s (EMinusOne e) = case (subst id s e) of 
+    ENat0 -> ENat0
+    (ENatS e) -> e
+subst id s (ERec i e1 e2) = subst id s (EApp (EAbs i e2) (EFix (EAbs i e1)))
