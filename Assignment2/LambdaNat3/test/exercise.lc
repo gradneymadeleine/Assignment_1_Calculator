@@ -1,0 +1,41 @@
+// Paste one of the comments in the command line
+// Do not run the interpreter without predicting a result first
+
+/*
+echo "(\ x.x) S 0" | stack exec LambdaNat-exe
+echo "\ x.x S 0" | stack exec LambdaNat-exe
+echo "(\ x.\ y.x) S 0  S S 0" | stack exec LambdaNat-exe
+echo "(\ x.\ y.y) S 0  S S 0" | stack exec LambdaNat-exe
+echo "(\ x.\ y.x) S 0  S S 0 S S S 0" | stack exec LambdaNat-exe
+echo "(\ x.\ y.y) S 0  S S 0 S S S 0" | stack exec LambdaNat-exe
+echo "(\ x. S x) S S 0" | stack exec LambdaNat-exe
+echo "(\ x. S y) S S 0" | stack exec LambdaNat-exe
+echo "(\ x. \y. S x y) S S 0" | stack exec LambdaNat-exe
+*/
+
+// given
+//((\ x.x) S 0)
+//(\ x.x S 0)
+//((\ x.\ y.x) S 0  S S 0)
+//((\ x.\ y.y) S 0  S S 0)
+//((\ x.\ y.x) S 0  S S 0 S S S 0)
+//((\ x.\ y.y) S 0  S S 0 S S S 0)
+//((\ x. S x) S S 0)
+//((\ x. S y) S S 0)
+//((\ x. \y. S x y) S S 0)
+
+// make up your own
+
+// pt 1
+// ( \ x. S x) S 0
+// ( \ x. S S x) 0
+
+// pt 2
+(\ x. if x = 0 then 0 else S x) 0
+// (\ x. if x = 0 then 0 else S x) S 0
+
+// let y = (S x) in (S x)
+// let x = (S 0) in (S x)
+
+// (\ x. minus_one x) S 0
+// (\ x. minus_one x) S S 0
