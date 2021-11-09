@@ -1,0 +1,34 @@
+let rec member = \ elem. \list. if list = # then 0 else
+                    if hd list = elem then 1 else
+                        member elem (tl list)
+in
+member 3 2:3:1:#
+
+;;
+
+let rec remove = \ elem. \list. if hd list = # then # else
+                    if hd list = elem then (tl list) else
+                        (hd list) : (remove elem (tl list))
+in
+remove 3 2:3:1#
+
+;;
+
+let plus_two = \ elem.
+    elem +  2
+in
+let rec map = \ func. \list.
+    if list = # then # else
+        (func(hd list)) : (map (func)(tl list))
+in
+map plus_two 1:2:3:4:#
+
+;;
+
+
+let rec prod = \list. if list = # then 1 else
+        (hd list) * prod(tl list)
+in
+prod 1:2:3:4:#
+
+;;
