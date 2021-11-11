@@ -32,3 +32,14 @@ in
 prod 1:2:3:4:#
 
 ;;
+
+let rec insert = \ int. \ list.
+    if list = # then (int :  #) else
+        if (int) less_equal (hd list) = 1 then (int : list) else
+            (hd list) : (insert int (tl list))
+in
+let rec sort = \ list.
+    if list = # then # else
+        insert (hd list) (sort(tl list))
+in
+sort 1:2:4:5:2:3:#

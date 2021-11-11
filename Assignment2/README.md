@@ -1,5 +1,8 @@
 # README
 
+    LambdaNat0 -- Assignment 2 starts Oct 19
+    LambdaNat2 -- solution to Part 1 added Oct 23
+
 ## Introduction
 
 Our aim is to learn how to extend and modify a small programming language. We start with the pure and untyped lambda calculus, available in the folder `LambdaNat0`. 
